@@ -35,7 +35,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>test1</h1>
+        <h1>🚀 Тестовое приложение</h1>
         <div id="status">Загрузка VK API...</div>
         <div id="content"></div>
     </div>
@@ -47,20 +47,20 @@
             
             if (typeof VK === 'undefined') {
                 document.getElementById('status').innerHTML = 
-                    'VK API NO (F12)';
+                    '❌ VK API не загрузился. Проверьте консоль (F12)';
                 return;
             }
             
             try {
-                // Инициализируем VK API
+                // Для мини-приложений НЕ указываем apiId - он берется из URL
                 VK.init(function() {
                     console.log('VK API инициализирован');
-                    document.getElementById('status').innerHTML = 'VK API YES';
+                    document.getElementById('status').innerHTML = '✅ VK API загружен';
                     checkAuth();
                 });
             } catch (error) {
                 console.error('Ошибка инициализации:', error);
-                document.getElementById('status').innerHTML = 'Ошибка: ' + error.message;
+                document.getElementById('status').innerHTML = '❌ Ошибка: ' + error.message;
             }
         }
         
@@ -82,6 +82,7 @@
         
         function login() {
             VK.Auth.login(function(response) {
+                console.log('Login response:', response);
                 if (response.session) {
                     showUserInfo();
                 }
@@ -89,13 +90,14 @@
         }
         
         function showUserInfo() {
-            VK.Api.call('users.get', {fields: 'photo_100'}, function(response) {
+            VK.Api.call('users.get', {fields: 'photo_100,first_name,last_name'}, function(response) {
+                console.log('User info:', response);
                 if (response.response) {
                     const user = response.response[0];
                     document.getElementById('content').innerHTML = `
-                        <img src="${user.photo_100}" style="border-radius: 50%;">
-                        <h3>YO, ${user.first_name}!</h3>
-                        <p>Work</p>
+                        <img src="${user.photo_100}" style="border-radius: 50%; width: 100px; height: 100px;">
+                        <h3>Привет, ${user.first_name}!</h3>
+                        <p>Приложение работает! ✅</p>
                     `;
                 }
             });
