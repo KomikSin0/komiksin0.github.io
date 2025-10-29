@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>TEST MINIAPP 4 VK</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test VK #54278842</title>
     <script src="https://vk.com/js/api/openapi.js?169"></script>
-    <style>
-        body { font-family: Arial; margin: 20px; }
-        .user-info { background: #f0f0f0; padding: 15px; border-radius: 5px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>TEST 1</h1>
-    <div id="user-info" class="user-info">
-        <p>Loading...</p>
+    <div class="container">
+        <h1>Test 4 VK</h1>
+        <p>ID: <strong>54278842</strong></p>
+        
+        <div id="app">
+            <div id="user-info" class="user-info">
+                <p>Loading...</p>
+            </div>
+            
+            <button id="login-btn" onclick="auth()" class="btn">Log in via VK</button>
+            
+            <div class="buttons">
+                <button onclick="getFriends()" class="btn">Give friends list</button>
+                <button onclick="getPhotos()" class="btn">Give photo list</button>
+            </div>
+            
+            <div id="friends-list" class="content-block"></div>
+            <div id="photos-list" class="content-block"></div>
+        </div>
     </div>
-    <button onclick="getFriends()">Button</button>
-    <div id="friends-list"></div>
-
     <script src="app.js"></script>
 </body>
 </html>
